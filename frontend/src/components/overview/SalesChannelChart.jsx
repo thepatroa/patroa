@@ -4,10 +4,12 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 const COLORS = ["#6366F1", "#8B5CF6", "#EC4899", "#10B981", "#F59E0B"];
 
 const SALES_CHANNEL_DATA = [
-	{ name: "Website", value: 45600 },
-	{ name: "Mobile App", value: 38200 },
-	{ name: "Marketplace", value: 29800 },
-	{ name: "Social Media", value: 18700 },
+	{ name: "Indicação", faturamento: 45600 },
+	{ name: "Site", faturamento: 38200 },
+	{ name: "Instagram", faturamento: 29800 },
+	{ name: "TikTok", faturamento: 18700 },
+	{ name: "Ligação Fria", faturamento: 45000 },
+	{ name: "E-mail ", faturamento: 15000 },
 ];
 
 const SalesChannelChart = () => {
@@ -18,7 +20,7 @@ const SalesChannelChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.4 }}
 		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>Sales by Channel</h2>
+			<h2 className='text-lg font-medium mb-4 text-gray-100'>Vendas por Canal de Aquisição</h2>
 
 			<div className='h-80'>
 				<ResponsiveContainer>
@@ -34,7 +36,7 @@ const SalesChannelChart = () => {
 							itemStyle={{ color: "#E5E7EB" }}
 						/>
 						<Legend />
-						<Bar dataKey={"value"} fill='#8884d8'>
+						<Bar dataKey={"faturamento"} fill='#8884d8'>
 							{SALES_CHANNEL_DATA.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 							))}

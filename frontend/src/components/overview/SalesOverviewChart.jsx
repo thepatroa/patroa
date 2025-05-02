@@ -2,18 +2,18 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { motion } from "framer-motion";
 
 const salesData = [
-	{ name: "Jul", sales: 4200 },
-	{ name: "Aug", sales: 3800 },
-	{ name: "Sep", sales: 5100 },
-	{ name: "Oct", sales: 4600 },
-	{ name: "Nov", sales: 5400 },
-	{ name: "Dec", sales: 7200 },
-	{ name: "Jan", sales: 6100 },
-	{ name: "Feb", sales: 5900 },
-	{ name: "Mar", sales: 6800 },
-	{ name: "Apr", sales: 6300 },
-	{ name: "May", sales: 7100 },
-	{ name: "Jun", sales: 7500 },
+	{ name: "Janeiro", faturamento: 6100 },
+	{ name: "Fevereiro", faturamento: 5900 },
+	{ name: "Março", faturamento: 6800 },
+	{ name: "Abril", faturamento: 6300 },
+	{ name: "Maio", faturamento: 7100 },
+	{ name: "Junho", faturamento: 7500 },
+	{ name: "Julho", faturamento: 4200 },
+	{ name: "Agosto", faturamento: 3800 },
+	{ name: "Setembro", faturamento: 5100 },
+	{ name: "Outubro", faturamento: 4600 },
+	{ name: "Novembro", faturamento: 5400 },
+	{ name: "Dezembro", faturamento: 7200 },
 ];
 
 const SalesOverviewChart = () => {
@@ -24,7 +24,7 @@ const SalesOverviewChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.2 }}
 		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>Sales Overview</h2>
+			<h2 className='text-lg font-medium mb-4 text-gray-100'>Faturamento por Mês</h2>
 
 			<div className='h-80'>
 				<ResponsiveContainer width={"100%"} height={"100%"}>
@@ -41,7 +41,7 @@ const SalesOverviewChart = () => {
 						/>
 						<Line
 							type='monotone'
-							dataKey='sales'
+							dataKey='faturamento'
 							stroke='#6366F1'
 							strokeWidth={3}
 							dot={{ fill: "#6366F1", strokeWidth: 2, r: 6 }}
