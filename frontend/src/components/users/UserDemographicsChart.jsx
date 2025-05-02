@@ -4,11 +4,11 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recha
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088FE"];
 
 const userDemographicsData = [
-	{ name: "18-24", value: 20 },
-	{ name: "25-34", value: 30 },
-	{ name: "35-44", value: 25 },
-	{ name: "45-54", value: 15 },
-	{ name: "55+", value: 10 },
+	{ nome: "18-24", idade: 20 },
+	{ nome: "25-34", idade: 30 },
+	{ nome: "35-44", idade: 25 },
+	{ nome: "45-54", idade: 15 },
+	{ nome: "55+", idade: 10 },
 ];
 
 const UserDemographicsChart = () => {
@@ -19,7 +19,7 @@ const UserDemographicsChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.5 }}
 		>
-			<h2 className='text-xl font-semibold text-gray-100 mb-4'>User Demographics</h2>
+			<h2 className='text-xl font-semibold text-gray-100 mb-4'>Idades dos Clientes</h2>
 			<div style={{ width: "100%", height: 300 }}>
 				<ResponsiveContainer>
 					<PieChart>
@@ -29,8 +29,8 @@ const UserDemographicsChart = () => {
 							cy='50%'
 							outerRadius={100}
 							fill='#8884d8'
-							dataKey='value'
-							label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+							dataKey='idade'
+							label={({ nome, percent }) => `${nome} ${(percent * 100).toFixed(0)}%`}
 						>
 							{userDemographicsData.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

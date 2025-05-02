@@ -9,16 +9,16 @@ import UserActivityHeatmap from "../components/users/UserActivityHeatmap";
 import UserDemographicsChart from "../components/users/UserDemographicsChart";
 
 const userStats = {
-	totalUsers: 152845,
-	newUsersToday: 243,
-	activeUsers: 98520,
+	totalUsers: 35,
+	newUsersToday: 5,
+	activeUsers: 29,
 	churnRate: "2.4%",
 };
 
 const UsersPage = () => {
 	return (
 		<div className='flex-1 overflow-auto relative z-10'>
-			<Header title='Users' />
+			<Header title='Clientes' />
 
 			<main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
 				{/* STATS */}
@@ -29,14 +29,14 @@ const UsersPage = () => {
 					transition={{ duration: 1 }}
 				>
 					<StatCard
-						name='Total Users'
+						name='Clientes Totais'
 						icon={UsersIcon}
 						value={userStats.totalUsers.toLocaleString()}
 						color='#6366F1'
 					/>
-					<StatCard name='New Users Today' icon={UserPlus} value={userStats.newUsersToday} color='#10B981' />
+					<StatCard name='Novos Clientes' icon={UserPlus} value={userStats.newUsersToday} color='#10B981' />
 					<StatCard
-						name='Active Users'
+						name='Clientes Ativos'
 						icon={UserCheck}
 						value={userStats.activeUsers.toLocaleString()}
 						color='#F59E0B'

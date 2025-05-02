@@ -2,12 +2,18 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { motion } from "framer-motion";
 
 const userGrowthData = [
-	{ month: "Jan", users: 1000 },
-	{ month: "Feb", users: 1500 },
-	{ month: "Mar", users: 2000 },
-	{ month: "Apr", users: 3000 },
-	{ month: "May", users: 4000 },
-	{ month: "Jun", users: 5000 },
+	{ month: "Janeiro", clientes: 15 },
+	{ month: "Fevereiro", clientes: 17 },
+	{ month: "Março", clientes: 20 },
+	{ month: "Abril", clientes: 25 },
+	{ month: "Maio", clientes: 25 },
+	{ month: "Junho", clientes: 27 },
+	{ month: "Julho", clientes: 30 },
+	{ month: "Agosto", clientes: 33 },
+	{ month: "Setembro", clientes: 35 },
+	{ month: "Outubro", clientes: 36 },
+	{ month: "Novembro", clientes: 33 },
+	{ month: "Dezembro", clientes: 35 },
 ];
 
 const UserGrowthChart = () => {
@@ -18,7 +24,7 @@ const UserGrowthChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
-			<h2 className='text-xl font-semibold text-gray-100 mb-4'>User Growth</h2>
+			<h2 className='text-xl font-semibold text-gray-100 mb-4'>Crescimento da Base de Clientes</h2>
 			<div className='h-[320px]'>
 				<ResponsiveContainer width='100%' height='100%'>
 					<LineChart data={userGrowthData}>
@@ -34,7 +40,7 @@ const UserGrowthChart = () => {
 						/>
 						<Line
 							type='monotone'
-							dataKey='users'
+							dataKey='clientes'
 							stroke='#8B5CF6'
 							strokeWidth={2}
 							dot={{ fill: "#8B5CF6", strokeWidth: 2, r: 4 }}
