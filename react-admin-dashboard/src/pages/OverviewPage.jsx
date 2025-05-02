@@ -1,4 +1,4 @@
-import { BarChart2, ShoppingBag, Users, Zap } from "lucide-react";
+import { BarChart2, ShoppingBag, Users, Zap, Bird } from "lucide-react";
 import { motion } from "framer-motion";
 
 import Header from "../components/common/Header";
@@ -20,10 +20,11 @@ const OverviewPage = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					<StatCard name='Total Sales' icon={Zap} value='$12,345' color='#6366F1' />
-					<StatCard name='New Users' icon={Users} value='1,234' color='#8B5CF6' />
-					<StatCard name='Total Products' icon={ShoppingBag} value='567' color='#EC4899' />
-					<StatCard name='Conversion Rate' icon={BarChart2} value='12.5%' color='#10B981' />
+					<StatCard name='Faturamento Anual' icon={Zap} value='R$ 50.345' color='#6366F1' />
+					<StatCard name='Lucro Anual' icon={Users} value='R$ 24.597' color='#8B5CF6' />
+					<StatCard name='Custo com Impostos' icon={Bird} value='R$ 12.479' color='#10B981' />
+					<StatCard name='Clientes Ativos' icon={ShoppingBag} value='14' color='#EC4899' />
+					
 				</motion.div>
 
 				{/* CHARTS */}
