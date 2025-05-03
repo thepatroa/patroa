@@ -1,4 +1,4 @@
-import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users } from "lucide-react";
+import { BarChart2,Fish, Cat, Dog, Rabbit, Squirrel, Turtle,Snail,  DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users,  } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -6,16 +6,17 @@ import { Link } from "react-router-dom";
 const SIDEBAR_ITEMS = [
 	{
 		name: "Visão Geral",
-		icon: BarChart2,
+		icon: Snail,
 		color: "#6366f1",
 		href: "/",
 	},
-	{ name: "Serviços", icon: ShoppingBag, color: "#8B5CF6", href: "/servicos" },
-	{ name: "Clientes", icon: Users, color: "#EC4899", href: "/clientes" },
-	{ name: "Marketing e Vendas", icon: DollarSign, color: "#10B981", href: "/vendas" },
-	{ name: "Colaboradores", icon: ShoppingCart, color: "#F59E0B", href: "/colaboradores" },
+	{ name: "Serviços", icon: Cat, color: "#8B5CF6", href: "/servicos" },
+	{ name: "Adicionar Informações", icon: Fish, color: "#F34", href: "/informacoes" },
+	{ name: "Clientes", icon: Dog, color: "#EC4899", href: "/clientes" },
+	{ name: "Marketing e Vendas", icon: Rabbit, color: "#10B981", href: "/vendas" },
+	{ name: "Colaboradores", icon: Squirrel, color: "#F59E0B", href: "/colaboradores" },
 	{ name: "Financeiro", icon: TrendingUp, color: "#3B82F6", href: "/financeiro" },
-	{ name: "Configuração", icon: Settings, color: "#6EE7B7", href: "/configuracao" },
+	{ name: "Configuração", icon: Turtle, color: "#6EE7B7", href: "/configuracao" },
 ];
 
 const Sidebar = () => {
