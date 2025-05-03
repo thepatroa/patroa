@@ -22,12 +22,12 @@ function App() {
 			<Sidebar />
 			<Routes>
 				<Route path='/' element={<OverviewPage />} />
-				<Route path='/products' element={<ProductsPage />} />
-				<Route path='/users' element={<UsersPage />} />
-				<Route path='/sales' element={<SalesPage />} />
+				<Route path='/servicos' element={<ProductsPage />} />
+				<Route path='/clientes' element={<UsersPage />} />
+				<Route path='/vendas' element={<SalesPage />} />
 				<Route path='/colaboradores' element={<OrdersPage />} />
-				<Route path='/analytics' element={<AnalyticsPage />} />
-				<Route path='/settings' element={<SettingsPage />} />
+				<Route path='/financeiro' element={<AnalyticsPage />} />
+				<Route path='/configuracao' element={<SettingsPage />} />
 			</Routes>
 		</div>
 	);

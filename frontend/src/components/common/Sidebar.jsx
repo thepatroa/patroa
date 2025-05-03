@@ -10,12 +10,12 @@ const SIDEBAR_ITEMS = [
 		color: "#6366f1",
 		href: "/",
 	},
-	{ name: "Serviços", icon: ShoppingBag, color: "#8B5CF6", href: "/products" },
-	{ name: "Clientes", icon: Users, color: "#EC4899", href: "/users" },
-	{ name: "Marketing e Vendas", icon: DollarSign, color: "#10B981", href: "/sales" },
+	{ name: "Serviços", icon: ShoppingBag, color: "#8B5CF6", href: "/servicos" },
+	{ name: "Clientes", icon: Users, color: "#EC4899", href: "/clientes" },
+	{ name: "Marketing e Vendas", icon: DollarSign, color: "#10B981", href: "/vendas" },
 	{ name: "Colaboradores", icon: ShoppingCart, color: "#F59E0B", href: "/colaboradores" },
-	{ name: "Financeiro", icon: TrendingUp, color: "#3B82F6", href: "/analytics" },
-	{ name: "Configuração", icon: Settings, color: "#6EE7B7", href: "/settings" },
+	{ name: "Financeiro", icon: TrendingUp, color: "#3B82F6", href: "/financeiro" },
+	{ name: "Configuração", icon: Settings, color: "#6EE7B7", href: "/configuracao" },
 ];
 
 const Sidebar = () => {
