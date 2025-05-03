@@ -3,13 +3,18 @@ import { motion } from "framer-motion";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const revenueData = [
-	{ month: "Jan", revenue: 4000, target: 3800 },
-	{ month: "Feb", revenue: 3000, target: 3200 },
-	{ month: "Mar", revenue: 5000, target: 4500 },
-	{ month: "Apr", revenue: 4500, target: 4200 },
-	{ month: "May", revenue: 6000, target: 5500 },
-	{ month: "Jun", revenue: 5500, target: 5800 },
-	{ month: "Jul", revenue: 7000, target: 6500 },
+	{ month: "Jan", bruto: 4000, liquido: 3800 },
+	{ month: "Fev", bruto: 3000, liquido: 3200 },
+	{ month: "Mar", bruto: 5000, liquido: 4500 },
+	{ month: "Abr", bruto: 4500, liquido: 4200 },
+	{ month: "Mai", bruto: 6000, liquido: 5500 },
+	{ month: "Jun", bruto: 5500, liquido: 5800 },
+	{ month: "Jul", bruto: 7000, liquido: 6500 },
+	{ month: "Ago", bruto: 7000, liquido: 6500 },
+	{ month: "Set", bruto: 7000, liquido: 6500 },
+	{ month: "Out", bruto: 7000, liquido: 3200 },
+	{ month: "Nove", bruto: 7000, liquido: 6500 },
+	{ month: "Dez", bruto: 7000, liquido: 6500 },
 ];
 
 const RevenueChart = () => {
@@ -23,16 +28,16 @@ const RevenueChart = () => {
 			transition={{ delay: 0.2 }}
 		>
 			<div className='flex justify-between items-center mb-6'>
-				<h2 className='text-xl font-semibold text-gray-100'>Revenue vs Target</h2>
+				<h2 className='text-xl font-semibold text-gray-100'>Lucro Bruto vs Lucro Líquido</h2>
 				<select
 					className='bg-gray-700 text-white rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500'
 					value={selectedTimeRange}
 					onChange={(e) => setSelectedTimeRange(e.target.value)}
 				>
-					<option>This Week</option>
-					<option>This Month</option>
-					<option>This Quarter</option>
-					<option>This Year</option>
+					<option>Essa Semana</option>
+					<option>Esse Mês</option>
+					<option>Esse Trimestre</option>
+					<option>Esse Ano</option>
 				</select>
 			</div>
 
@@ -47,8 +52,8 @@ const RevenueChart = () => {
 							itemStyle={{ color: "#E5E7EB" }}
 						/>
 						<Legend />
-						<Area type='monotone' dataKey='revenue' stroke='#8B5CF6' fill='#8B5CF6' fillOpacity={0.3} />
-						<Area type='monotone' dataKey='target' stroke='#10B981' fill='#10B981' fillOpacity={0.3} />
+						<Area type='monotone' dataKey='bruto' stroke='#8B5CF6' fill='#8B5CF6' fillOpacity={0.3} />
+						<Area type='monotone' dataKey='liquido' stroke='#10B981' fill='#10B981' fillOpacity={0.3} />
 					</AreaChart>
 				</ResponsiveContainer>
 			</div>
