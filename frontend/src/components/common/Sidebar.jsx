@@ -13,7 +13,7 @@ const SIDEBAR_ITEMS = [
 	{ name: "Serviços", icon: Landmark, color: "#8B5CF6", href: "/servicos" },
 	{ name: "Adicionar Informações", icon: LibraryBig, color: "#F34", href: "/informacoes" },
 	{ name: "Clientes", icon: UserRoundPlus, color: "#EC4899", href: "/clientes" },
-	{ name: "Ads", icon: KeyRound, color: "#10B981", href: "/vendas" },
+	{ name: "Ads", icon: KeyRound, color: "#10B981", href: "/ads" },
 	{ name: "Colaboradores", icon: Users, color: "#F59E0B", href: "/colaboradores" },
 	{ name: "Financeiro", icon: DollarSign, color: "#3B82F6", href: "/financeiro" },
 	{ name: "Configuração", icon: Code, color: "#6EE7B7", href: "/configuracao" },

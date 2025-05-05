@@ -24,7 +24,7 @@ function App() {
 				<Route path='/' element={<OverviewPage />} />
 				<Route path='/servicos' element={<ProductsPage />} />
 				<Route path='/clientes' element={<UsersPage />} />
-				<Route path='/vendas' element={<SalesPage />} />
+				<Route path='/ads' element={<SalesPage />} />
 				<Route path='/colaboradores' element={<OrdersPage />} />
 				<Route path='/financeiro' element={<AnalyticsPage />} />
 				<Route path='/configuracao' element={<SettingsPage />} />
