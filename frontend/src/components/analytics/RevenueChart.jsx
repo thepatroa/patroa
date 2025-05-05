@@ -29,16 +29,6 @@ const RevenueChart = () => {
 		>
 			<div className='flex justify-between items-center mb-6'>
 				<h2 className='text-xl font-semibold text-gray-100'>Lucro Bruto vs Lucro Líquido</h2>
-				<select
-					className='bg-gray-700 text-white rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500'
-					value={selectedTimeRange}
-					onChange={(e) => setSelectedTimeRange(e.target.value)}
-				>
-					<option>Essa Semana</option>
-					<option>Esse Mês</option>
-					<option>Esse Trimestre</option>
-					<option>Esse Ano</option>
-				</select>
 			</div>
 
 			<div style={{ width: "100%", height: 400 }}>
