@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 
 const userData = [
-	{ id: 1, nome: "John Doe", email: "john@example.com", profissao: "Engenheiro", status: "Active" },
-	{ id: 2, nome: "Jane Smith", email: "jane@example.com", profissao: "Contador", status: "Active" },
-	{ id: 3, nome: "Bob Johnson", email: "bob@example.com", profissao: "Programador", status: "Inactive" },
-	{ id: 4, nome: "Alice Brown", email: "alice@example.com", profissao: "Astronauta", status: "Active" },
-	{ id: 5, nome: "Charlie Wilson", email: "charlie@example.com", profissao: "Farmacêutico", status: "Active" },
+	{ id: 1, nome: "John Doe", email: "john@example.com", profissao: "Engenheiro", ads: "R$ 1.500", status: "Active" },
+	{ id: 2, nome: "Jane Smith", email: "jane@example.com", profissao: "Contador", ads: "R$ 1.400", status: "Active" },
+	{ id: 3, nome: "Bob Johnson", email: "bob@example.com", profissao: "Programador", ads: "R$ 2.500", status: "Inactive" },
+	{ id: 4, nome: "Alice Brown", email: "alice@example.com", profissao: "Astronauta", ads: "R$ 400", status: "Active" },
+	{ id: 5, nome: "Charlie Wilson", email: "charlie@example.com", profissao: "Farmacêutico", ads: "R$ 1.500", status: "Active" },
 ];
 
 const UsersTable = () => {
@@ -58,6 +58,9 @@ const UsersTable = () => {
 								Profissão
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Investimento em Ads
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
 								Status
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
@@ -95,7 +98,9 @@ const UsersTable = () => {
 										{user.profissao}
 									</span>
 								</td>
-
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<div className='text-sm text-gray-300'>{user.ads}</div>
+								</td>
 								<td className='px-6 py-4 whitespace-nowrap'>
 									<span
 										className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
