@@ -5,7 +5,7 @@ const overviewData = [
 	{ name: "Valuation da Empresa", value: "R$ 67.560", change: 15.7, icon: DollarSign },
 	{ name: "Lucro Bruto", value: "R$ 12.346", change: 12.5, icon: Eye },
 	{ name: "Lucro Líquido", value: "R$ 9.543", change: 8.3, icon: Users },
-	{ name: "Break-even", value: "R$ 9.876", change: -3.2, icon: ShoppingBag },	
+	{ name: "LTV Médio", value: "R$ 9.876", change: +3.2, icon: ShoppingBag },	
 ];
 
 const OverviewCards = () => {
