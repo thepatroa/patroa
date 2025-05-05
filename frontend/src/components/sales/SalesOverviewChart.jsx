@@ -4,12 +4,12 @@ import { useState } from "react";
 
 const monthlySalesData = [
 	{ month: "Jan", sales: 4000 },
-	{ month: "Feb", sales: 3000 },
+	{ month: "Feb", sales: 14000 },
 	{ month: "Mar", sales: 5000 },
 	{ month: "Apr", sales: 4500 },
-	{ month: "May", sales: 6000 },
+	{ month: "May", sales: 13000 },
 	{ month: "Jun", sales: 5500 },
-	{ month: "Jul", sales: 7000 },
+	{ month: "Jul", sales: 19000 },
 ];
 
 const SalesOverviewChart = () => {
@@ -23,7 +23,7 @@ const SalesOverviewChart = () => {
 			transition={{ delay: 0.2 }}
 		>
 			<div className='flex items-center justify-between mb-6'>
-				<h2 className='text-xl font-semibold text-gray-100'>Faturamento por Mês</h2>
+				<h2 className='text-xl font-semibold text-gray-100'>Investimento em Anúncios por Mês</h2>
 
 				<select
 					className='bg-gray-700 text-white rounded-md px-3 py-1 focus:outline-none focus:ring-2 
