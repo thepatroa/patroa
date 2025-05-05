@@ -42,7 +42,7 @@ const OverviewCards = () => {
 					>
 						{item.change >= 0 ? <ArrowUpRight size='20' /> : <ArrowDownRight size='20' />}
 						<span className='ml-1 text-sm font-medium'>{Math.abs(item.change)}%</span>
-						<span className='ml-2 text-sm text-gray-400'>vs last period</span>
+						<span className='ml-2 text-sm text-gray-400'>vs último período</span>
 					</div>
 				</motion.div>
 			))}
