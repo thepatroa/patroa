@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
-
 const userData = [
 	{
 		id: 1,
@@ -14,8 +13,19 @@ const userData = [
 		leads: 30,
 		conversao: "12%",
 		roas: "3.2x",
-		ctr: "5.8%"
+		ctr: "5.8%",
+		canalPrincipal: "Meta Ads",
+		objetivoCampanha: "Geração de Leads",
+		ticketMedio: "R$ 1.200",
+		publicoAlvo: "Homens 30-45, engenheiros civis",
+		landingPageOk: true,
+		funilCompleto: true,
+		remarketingAtivo: true,
+		tempoConversao: "5 dias",
+		tipoOferta: "Serviço de consultoria",
+		criativosAtualizados: false
 	},
+
 	{
 		id: 2,
 		nome: "Jane Smith",
@@ -27,7 +37,17 @@ const userData = [
 		leads: 28,
 		conversao: "10%",
 		roas: "2.7x",
-		ctr: "4.5%"
+		ctr: "4.5%",
+		canalPrincipal: "Google Ads",
+		objetivoCampanha: "Conversão direta",
+		ticketMedio: "R$ 2.500",
+		publicoAlvo: "MEIs e pequenas empresas",
+		landingPageOk: true,
+		funilCompleto: false,
+		remarketingAtivo: false,
+		tempoConversao: "7 dias",
+		tipoOferta: "Serviço contábil mensal",
+		criativosAtualizados: true
 	},
 	{
 		id: 3,
@@ -40,7 +60,17 @@ const userData = [
 		leads: 40,
 		conversao: "8%",
 		roas: "2.1x",
-		ctr: "3.8%"
+		ctr: "3.8%",
+		canalPrincipal: "Meta Ads",
+		objetivoCampanha: "Venda de curso",
+		ticketMedio: "R$ 397",
+		publicoAlvo: "Estudantes de TI e iniciantes",
+		landingPageOk: false,
+		funilCompleto: true,
+		remarketingAtivo: false,
+		tempoConversao: "3 dias",
+		tipoOferta: "Infoproduto gravado",
+		criativosAtualizados: false
 	},
 	{
 		id: 4,
@@ -53,7 +83,17 @@ const userData = [
 		leads: 5,
 		conversao: "5%",
 		roas: "1.5x",
-		ctr: "2.1%"
+		ctr: "2.1%",
+		canalPrincipal: "TikTok Ads",
+		objetivoCampanha: "Branding",
+		ticketMedio: "R$ 500",
+		publicoAlvo: "Curiosos sobre ciência espacial",
+		landingPageOk: true,
+		funilCompleto: false,
+		remarketingAtivo: false,
+		tempoConversao: "10 dias",
+		tipoOferta: "Mentoria ao vivo",
+		criativosAtualizados: true
 	},
 	{
 		id: 5,
@@ -66,7 +106,17 @@ const userData = [
 		leads: 40,
 		conversao: "15%",
 		roas: "3.5x",
-		ctr: "6.3%"
+		ctr: "6.3%",
+		canalPrincipal: "Meta Ads",
+		objetivoCampanha: "Geração de Leads",
+		ticketMedio: "R$ 800",
+		publicoAlvo: "Farmacêuticos e donos de farmácia",
+		landingPageOk: true,
+		funilCompleto: true,
+		remarketingAtivo: true,
+		tempoConversao: "2 dias",
+		tipoOferta: "Consultoria de estoque",
+		criativosAtualizados: false
 	}
 ];
 
@@ -138,6 +188,36 @@ const UsersTable = () => {
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
 								CTR
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Canal Principal
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Objetivo Campanha
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Ticket Medio
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Público Alvo
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Landing Page
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Funil Completo
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Remarketing Ativo
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Tempo Médio de Conversão
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Produto/Serviço
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Criativos Atualizados
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
 								Ação
@@ -212,8 +292,56 @@ const UsersTable = () => {
 										{user.ctr}
 									</span>
 								</td>
-
-
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800'>
+										{user.canalPrincipal}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+										{user.objetivoCampanha}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800'>
+										{user.ticketMedio}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-rose-100 text-rose-800'>
+										{user.publicoAlvo}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.landingPageOk ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}`}>
+										{user.landingPageOk ? 'Sim' : 'Não'}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.funilCompleto ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}`}>
+										{user.funilCompleto ? 'Sim' : 'Não'}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.remarketingAtivo ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}`}>
+										{user.remarketingAtivo ? 'Sim' : 'Não'}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 text-orange-800'>
+										{user.tempoConversao}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-sky-100 text-sky-800'>
+										{user.tipoOferta}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.criativosAtualizados ? 'bg-lime-100 text-lime-800' : 'bg-gray-200 text-gray-700'}`}>
+										{user.criativosAtualizados ? 'Atualizados' : 'Desatualizados'}
+									</span>
+								</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
 									<button className='text-indigo-400 hover:text-indigo-300 mr-2'>Edit</button>
 									<button className='text-red-400 hover:text-red-300'>Delete</button>
