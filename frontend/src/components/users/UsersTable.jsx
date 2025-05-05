@@ -3,12 +3,73 @@ import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 
 const userData = [
-	{ id: 1, nome: "John Doe", email: "john@example.com", profissao: "Engenheiro", ads: "R$ 1.500", status: "Active" },
-	{ id: 2, nome: "Jane Smith", email: "jane@example.com", profissao: "Contador", ads: "R$ 1.400", status: "Active" },
-	{ id: 3, nome: "Bob Johnson", email: "bob@example.com", profissao: "Programador", ads: "R$ 2.500", status: "Inactive" },
-	{ id: 4, nome: "Alice Brown", email: "alice@example.com", profissao: "Astronauta", ads: "R$ 400", status: "Active" },
-	{ id: 5, nome: "Charlie Wilson", email: "charlie@example.com", profissao: "Farmacêutico", ads: "R$ 1.500", status: "Active" },
+	{
+		id: 1,
+		nome: "John Doe",
+		email: "john@example.com",
+		profissao: "Engenheiro",
+		ads: "R$ 1.500",
+		status: "Active",
+		cpa: "R$ 50",
+		leads: 30,
+		conversao: "12%",
+		roas: "3.2x",
+		ctr: "5.8%"
+	},
+	{
+		id: 2,
+		nome: "Jane Smith",
+		email: "jane@example.com",
+		profissao: "Contador",
+		ads: "R$ 1.400",
+		status: "Active",
+		cpa: "R$ 46.67",
+		leads: 28,
+		conversao: "10%",
+		roas: "2.7x",
+		ctr: "4.5%"
+	},
+	{
+		id: 3,
+		nome: "Bob Johnson",
+		email: "bob@example.com",
+		profissao: "Programador",
+		ads: "R$ 2.500",
+		status: "Inactive",
+		cpa: "R$ 62.5",
+		leads: 40,
+		conversao: "8%",
+		roas: "2.1x",
+		ctr: "3.8%"
+	},
+	{
+		id: 4,
+		nome: "Alice Brown",
+		email: "alice@example.com",
+		profissao: "Astronauta",
+		ads: "R$ 400",
+		status: "Active",
+		cpa: "R$ 80",
+		leads: 5,
+		conversao: "5%",
+		roas: "1.5x",
+		ctr: "2.1%"
+	},
+	{
+		id: 5,
+		nome: "Charlie Wilson",
+		email: "charlie@example.com",
+		profissao: "Farmacêutico",
+		ads: "R$ 1.500",
+		status: "Active",
+		cpa: "R$ 37.5",
+		leads: 40,
+		conversao: "15%",
+		roas: "3.5x",
+		ctr: "6.3%"
+	}
 ];
+
 
 const UsersTable = () => {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -64,6 +125,21 @@ const UsersTable = () => {
 								Status
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								CPA
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Leads
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								Conversão
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								ROAS
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
+								CTR
+							</th>
+							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
 								Ação
 							</th>
 						</tr>
@@ -103,15 +179,40 @@ const UsersTable = () => {
 								</td>
 								<td className='px-6 py-4 whitespace-nowrap'>
 									<span
-										className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-											user.status === "Active"
-												? "bg-green-800 text-green-100"
-												: "bg-red-800 text-red-100"
-										}`}
+										className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.status === "Active"
+											? "bg-green-800 text-green-100"
+											: "bg-red-800 text-red-100"
+											}`}
 									>
 										{user.status}
 									</span>
 								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800'>
+										{user.cpa}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+										{user.leads}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800'>
+										{user.conversao}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-pink-100 text-pink-800'>
+										{user.roas}
+									</span>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap'>
+									<span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800'>
+										{user.ctr}
+									</span>
+								</td>
+
 
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
 									<button className='text-indigo-400 hover:text-indigo-300 mr-2'>Edit</button>
