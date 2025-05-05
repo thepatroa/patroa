@@ -4,12 +4,17 @@ import { useState } from "react";
 
 const monthlySalesData = [
 	{ month: "Jan", sales: 4000 },
-	{ month: "Feb", sales: 14000 },
+	{ month: "Fev", sales: 14000 },
 	{ month: "Mar", sales: 5000 },
-	{ month: "Apr", sales: 4500 },
-	{ month: "May", sales: 13000 },
+	{ month: "Abr", sales: 4500 },
+	{ month: "Mai", sales: 13000 },
 	{ month: "Jun", sales: 5500 },
 	{ month: "Jul", sales: 19000 },
+	{ month: "Ago", sales: 9000 },
+	{ month: "Set", sales: 19000 },
+	{ month: "Out", sales: 9000 },
+	{ month: "Nov", sales: 19000 },
+	{ month: "Dez", sales: 9000 },
 ];
 
 const SalesOverviewChart = () => {
