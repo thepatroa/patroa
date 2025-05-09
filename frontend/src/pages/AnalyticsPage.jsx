@@ -24,7 +24,6 @@ const AnalyticsPage = () => {
 					<CustomerSegmentation />
 				</div>
 
-				<AIPoweredInsights />
 			</main>
 		</div>
 	);
