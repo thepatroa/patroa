@@ -7,9 +7,12 @@ import ProductPerformance from "../components/analytics/ProductPerformance";
 import UserRetention from "../components/analytics/UserRetention";
 import CustomerSegmentation from "../components/analytics/CustomerSegmentation";
 import FinancialRunwayChart from "../components/analytics/FinancialRunwayChart";
+import RevenueProjectionChart from "../components/analytics/RevenueProjectionChart";
 
 const currentCash = 30000;
 const burnRate = 5000;
+const currentRevenue = 5000;
+const growthRate = 50;
 
 const AnalyticsPage = () => {
 	return (
@@ -26,7 +29,7 @@ const AnalyticsPage = () => {
 					<UserRetention />
 					<CustomerSegmentation />
 				</div>
-
+					<RevenueProjectionChart currentRevenue={currentRevenue} growthRate={growthRate}/>
 					<FinancialRunwayChart currentCash={currentCash} burnRate={burnRate} />
 
 			</main>
