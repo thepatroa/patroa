@@ -6,7 +6,10 @@ import ChannelPerformance from "../components/analytics/ChannelPerformance";
 import ProductPerformance from "../components/analytics/ProductPerformance";
 import UserRetention from "../components/analytics/UserRetention";
 import CustomerSegmentation from "../components/analytics/CustomerSegmentation";
-import AIPoweredInsights from "../components/analytics/AIPoweredInsights";
+import FinancialRunwayChart from "../components/analytics/FinancialRunwayChart";
+
+const currentCash = 30000;
+const burnRate = 5000;
 
 const AnalyticsPage = () => {
 	return (
@@ -23,6 +26,8 @@ const AnalyticsPage = () => {
 					<UserRetention />
 					<CustomerSegmentation />
 				</div>
+
+					<FinancialRunwayChart currentCash={currentCash} burnRate={burnRate} />
 
 			</main>
 		</div>
