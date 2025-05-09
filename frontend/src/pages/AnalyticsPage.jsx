@@ -8,11 +8,15 @@ import UserRetention from "../components/analytics/UserRetention";
 import CustomerSegmentation from "../components/analytics/CustomerSegmentation";
 import FinancialRunwayChart from "../components/analytics/FinancialRunwayChart";
 import RevenueProjectionChart from "../components/analytics/RevenueProjectionChart";
+import LifetimeValueCard from "../components/analytics/LifetimeValueCard";
 
 const currentCash = 30000;
 const burnRate = 5000;
 const currentRevenue = 5000;
 const growthRate = 50;
+const ltv = 15000;
+const averageRevenue = 5000;
+const averageLifespan = 36;
 
 const AnalyticsPage = () => {
 	return (
@@ -24,10 +28,9 @@ const AnalyticsPage = () => {
 				<RevenueChart />
 
 				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8'>
-					<ChannelPerformance />
+					<LifetimeValueCard ltv={ltv} averageLifespan={averageLifespan} averageRevenue={averageRevenue} />
 					<ProductPerformance />
-					<UserRetention />
-					<CustomerSegmentation />
+					
 				</div>
 					<RevenueProjectionChart currentRevenue={currentRevenue} growthRate={growthRate}/>
 					<FinancialRunwayChart currentCash={currentCash} burnRate={burnRate} />
