@@ -5,7 +5,7 @@ import StatCard from "../components/common/StatCard";
 import { CreditCard, DollarSign, ShoppingCart, TrendingUp } from "lucide-react";
 import SalesOverviewChart from "../components/sales/SalesOverviewChart";
 import SalesByCategoryChart from "../components/sales/SalesByCategoryChart";
-import DailySalesTrend from "../components/sales/DailySalesTrend";
+import CustoDeAquisicaoDeClientes from "../components/sales/CustoDeAquisicaoDeClientes";
 
 const salesStats = {
 	totalAdsSpending: "R$ 10.864",
@@ -47,7 +47,7 @@ const SalesPage = () => {
 
 				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8'>
 					<SalesByCategoryChart />
-					<DailySalesTrend />
+					<CustoDeAquisicaoDeClientes />
 				</div>
 			</main>
 		</div>
