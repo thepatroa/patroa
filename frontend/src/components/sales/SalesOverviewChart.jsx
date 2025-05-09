@@ -3,18 +3,18 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useState } from "react";
 
 const monthlySalesData = [
-	{ month: "Jan", sales: 4000 },
-	{ month: "Fev", sales: 14000 },
-	{ month: "Mar", sales: 5000 },
-	{ month: "Abr", sales: 4500 },
-	{ month: "Mai", sales: 13000 },
-	{ month: "Jun", sales: 5500 },
-	{ month: "Jul", sales: 19000 },
-	{ month: "Ago", sales: 9000 },
-	{ month: "Set", sales: 19000 },
-	{ month: "Out", sales: 9000 },
-	{ month: "Nov", sales: 19000 },
-	{ month: "Dez", sales: 9000 },
+	{ month: "Jan", valor: 300 },
+	{ month: "Fev", valor: 700 },
+	{ month: "Mar", valor: 500 },
+	{ month: "Abr", valor: 450 },
+	{ month: "Mai", valor: 900 },
+	{ month: "Jun", valor: 700 },
+	{ month: "Jul", valor: 1500 },
+	{ month: "Ago", valor: 1200 },
+	{ month: "Set", valor: 2000 },
+	{ month: "Out", valor: 2500 },
+	{ month: "Nov", valor: 3000 },
+	{ month: "Dez", valor: 2000 },
 ];
 
 const SalesOverviewChart = () => {
@@ -41,7 +41,7 @@ const SalesOverviewChart = () => {
 							contentStyle={{ backgroundColor: "rgba(31, 41, 55, 0.8)", borderColor: "#4B5563" }}
 							itemStyle={{ color: "#E5E7EB" }}
 						/>
-						<Area type='monotone' dataKey='sales' stroke='#8B5CF6' fill='#8B5CF6' fillOpacity={0.3} />
+						<Area type='monotone' dataKey='valor' stroke='#8B5CF6' fill='#8B5CF6' fillOpacity={0.3} />
 					</AreaChart>
 				</ResponsiveContainer>
 			</div>
