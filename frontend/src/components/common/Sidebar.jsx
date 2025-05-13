@@ -1,4 +1,4 @@
-import { Cog,LibraryBig, Landmark, UserRoundPlus, KeyRound, CirclePlus,Gem,  DollarSign, Menu, Users,  } from "lucide-react";
+import { Cog,Search, ScrollText, UserRoundPlus, KeyRound, CirclePlus,Gem,  DollarSign, Menu, Users,  } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 const SIDEBAR_ITEMS = [
 	{
 		name: "Visão Geral",
-		icon: Gem,
+		icon: Search,
 		color: "#6366f1",
 		href: "/",
 	},
-	{ name: "Serviços", icon: Landmark, color: "#8B5CF6", href: "/servicos" },
+	{ name: "Serviços", icon: ScrollText, color: "#8B5CF6", href: "/servicos" },
 	{ name: "Adicionar Informações", icon: CirclePlus, color: "#F34", href: "/informacoes" },
 	{ name: "Clientes", icon: UserRoundPlus, color: "#EC4899", href: "/clientes" },
 	{ name: "Ads", icon: KeyRound, color: "#10B981", href: "/ads" },
