@@ -9,6 +9,7 @@ import SalesPage from "./pages/SalesPage";
 import OrdersPage from "./pages/ColaboradoresPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import SettingsPage from "./pages/SettingsPage";
+import BusinessOverviewForm from "./pages/InformationOverview";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 			<Routes>
 				<Route path='/' element={<OverviewPage />} />
 				<Route path='/servicos' element={<ProductsPage />} />
+				<Route path='/informacoes' element={<BusinessOverviewForm />} />
 				<Route path='/clientes' element={<UsersPage />} />
 				<Route path='/ads' element={<SalesPage />} />
 				<Route path='/colaboradores' element={<OrdersPage />} />
