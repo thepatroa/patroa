@@ -92,17 +92,18 @@ const initialData = {
 
 const UsersTable = () => {
   const [startIndex, setStartIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const clients = initialData.Active;
 
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
       setStartIndex((prev) =>
         prev + 1 > clients.length - 3 ? 0 : prev + 1
       );
-    }, 3000); // muda a cada 3 segundos
-
+    }, 3000);
     return () => clearInterval(interval);
-  }, [clients.length]);
+  }, [clients.length, isPaused]);
 
   return (
     <div className="p-8 overflow-hidden">
@@ -116,28 +117,40 @@ const UsersTable = () => {
           style={{ width: `${(clients.length / 3) * 100}%` }}
         >
           {clients.map((user, index) => (
-            <div
+            <motion.div
               key={user.id + index}
               className="min-w-[33.3333%] max-w-[33.3333%] px-2"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              whileHover={{
+                scale: 1.05,
+                zIndex: 10,
+                transition: { duration: 0.3 }
+              }}
             >
-              <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-lg p-6 text-white border border-gray-700 h-full">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-bold">{user.nome}</h2>
-                  <span className="text-sm text-gray-400">{user.profissao}</span>
+              <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-lg p-6 text-white border border-gray-700 h-full flex flex-col justify-between">
+                {/* Cabeçalho */}
+                <div className="mb-4">
+                  <h2 className="text-2xl font-bold text-white">{user.nome}</h2>
+                  <p className="text-sm text-gray-400">{user.profissao}</p>
+                  <p className="text-xs text-blue-300 mt-1">{user.email}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                  <DataRow label="Email" value={user.email} />
+
+                <hr className="border-gray-700 my-3" />
+
+                {/* Indicadores */}
+                <div className="grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
                   <DataRow label="Leads" value={user.leads} />
                   <DataRow label="CPA" value={user.cpa} color="text-green-400" />
                   <DataRow label="ROAS" value={user.roas} color="text-pink-400" />
                   <DataRow label="Conversão" value={user.conversao} color="text-purple-400" />
-                  <DataRow label="Ads" value={user.ads} color="text-blue-400" />
+                  <DataRow label="Investimento" value={user.ads} color="text-blue-400" />
                   <DataRow label="Canal" value={user.canalPrincipal} />
                   <DataRow label="Oferta" value={user.tipoOferta} />
-                  <DataRow label="Tempo" value={user.tempoConversao} />
+                  <DataRow label="Tempo p/ Converter" value={user.tempoConversao} />
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>
@@ -147,8 +160,8 @@ const UsersTable = () => {
 
 const DataRow = ({ label, value, color }) => (
   <div className="flex flex-col">
-    <span className="text-gray-400 text-xs">{label}</span>
-    <span className={`font-medium ${color || "text-gray-100"}`}>{value}</span>
+    <span className="text-xs text-gray-400 uppercase tracking-wider">{label}</span>
+    <span className={`text-sm font-semibold ${color || "text-white"}`}>{value}</span>
   </div>
 );
 
