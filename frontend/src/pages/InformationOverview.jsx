@@ -347,14 +347,13 @@ const SendDialog = ({ open, onClose, formData }) => {
 	return (
 		<AnimatePresence>
 			{open && (
-				<motion.dialog
-					open
-					onClose={onClose}
+				<motion.div
 					className='fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm'
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 				>
+
 					<motion.div
 						layoutId='submit-button'
 						className='bg-gray-900 border border-gray-700 p-6 rounded-xl shadow-2xl text-white w-[90%] max-w-xl'
@@ -381,7 +380,7 @@ const SendDialog = ({ open, onClose, formData }) => {
 							</button>
 						</div>
 					</motion.div>
-				</motion.dialog>
+				</motion.div>
 			)}
 		</AnimatePresence>
 	);
