@@ -18,6 +18,7 @@ const BusinessOverviewForm = () => {
 		companyType: "MEI",
 		employees: [{ name: "", salary: "", role: "" }],
 		servicePrice: "",
+		clients: []
 	});
 
 	const handleChange = (e) => {
@@ -32,8 +33,7 @@ const BusinessOverviewForm = () => {
 
 	const handleEmployeeChange = (index, field, value) => {
 		const updated = [...form.employees];
-		updated[index][field] =
-			field === "salary" ? currencyFormatter.format(Number(value.replace(/\D/g, "")) / 100) : value;
+		updated[index][field] = field === "salary" ? currencyFormatter.format(Number(value.replace(/\D/g, "")) / 100) : value;
 		setForm({ ...form, employees: updated });
 	};
 
@@ -46,6 +46,37 @@ const BusinessOverviewForm = () => {
 		setForm({ ...form, employees: updated });
 	};
 
+	const handleClientChange = (index, field, value) => {
+		const updated = [...form.clients];
+		updated[index][field] = value;
+		setForm({ ...form, clients: updated });
+	};
+
+	const removeClient = (indexToRemove) => {
+		const updated = form.clients.filter((_, idx) => idx !== indexToRemove);
+		setForm({ ...form, clients: updated });
+	};
+
+	const addClient = () => {
+		setForm({
+			...form,
+			clients: [...form.clients, {
+				name: "",
+				type: "MEI",
+				company: "",
+				email: "",
+				leads: "",
+				cpa: "",
+				roas: "",
+				conversion: "",
+				monthlyFee: "",
+				channel: "",
+				description: "",
+				duration: ""
+			}]
+		});
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log("📤 Dados para envio:", JSON.stringify(form, null, 2));
@@ -56,100 +87,72 @@ const BusinessOverviewForm = () => {
 		<div className='flex-1 relative z-10 overflow-auto'>
 			<main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
 				<h2 className='text-2xl font-semibold mb-6 text-gray-100'>📋 Dados do Negócio</h2>
-
 				<form onSubmit={handleSubmit} className='grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-100'>
 					<InputField label='Faturamento Mês Passado' name='lastMonthRevenue' icon={DollarSign} value={form.lastMonthRevenue} onChange={handleCurrencyChange} />
 					<InputField label='Total de Clientes' name='totalClients' icon={Users} value={form.totalClients} onChange={handleChange} />
 					<InputField label='Clientes Ativos' name='activeClients' icon={UserCheck} value={form.activeClients} onChange={handleChange} />
 					<InputField label='Leads Mês Passado' name='lastMonthLeads' icon={UserPlus} value={form.lastMonthLeads} onChange={handleChange} />
 					<InputField label='Número de Funcionários' name='totalEmployees' icon={Briefcase} value={form.totalEmployees} onChange={handleChange} />
-
-					{/* SELECT TIPO DE EMPRESA */}
 					<div>
 						<label className='block text-sm font-medium text-gray-300 mb-2'>Tipo de Empresa</label>
 						<div className='bg-gray-800 border border-gray-700 rounded-lg px-4 py-2'>
-							<select
-								name='companyType'
-								value={form.companyType}
-								onChange={handleChange}
-								className='w-full bg-transparent text-white outline-none'
-							>
+							<select name='companyType' value={form.companyType} onChange={handleChange} className='w-full bg-transparent text-white outline-none'>
 								<option value='MEI'>MEI</option>
 								<option value='Microempresa'>Microempresa</option>
 								<option value='Pequena Empresa'>Pequena Empresa</option>
 							</select>
 						</div>
 					</div>
-
 					<InputField label='Preço do Serviço' name='servicePrice' icon={DollarSign} value={form.servicePrice} onChange={handleCurrencyChange} />
-
-					{/* FUNCIONÁRIOS */}
 					<div className='sm:col-span-2'>
-						<label className='block text-sm font-medium text-gray-300 mb-2'>Funcionários</label>
-
-						<AnimatePresence>
-							{form.employees.map((emp, index) => (
-								<motion.div
-									key={index}
-									initial={{ opacity: 0, y: -10 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-									className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 relative'
-								>
-									<input
-										type='text'
-										placeholder='Nome'
-										className='bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
-										value={emp.name}
-										onChange={(e) => handleEmployeeChange(index, "name", e.target.value)}
-									/>
-									<input
-										type='text'
-										placeholder='Cargo'
-										className='bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
-										value={emp.role}
-										onChange={(e) => handleEmployeeChange(index, "role", e.target.value)}
-									/>
-									<div className='flex gap-2'>
-										<input
-											type='text'
-											placeholder='Salário'
-											className='flex-1 bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
-											value={emp.salary}
-											onChange={(e) => handleEmployeeChange(index, "salary", e.target.value)}
-										/>
-										{form.employees.length > 1 && (
-											<button
-												type='button'
-												onClick={() => removeEmployee(index)}
-												className='text-red-500 hover:text-red-400 px-2'
-												title='Remover colaborador'
-											>
-												<Trash2 size={20} />
-											</button>
-										)}
-									</div>
-								</motion.div>
-							))}
-						</AnimatePresence>
-
-						<button
-							type='button'
-							onClick={addEmployee}
-							className='text-sm text-indigo-400 hover:underline'
-						>
-							+ Adicionar Funcionário
-						</button>
+						<label className='block text-sm font-medium text-gray-300 mb-2'>Clientes</label>
+						{form.clients.length > 0 && (
+							<AnimatePresence>
+								{form.clients.map((client, index) => (
+									<motion.div
+										key={index}
+										initial={{ opacity: 0, y: -10 }}
+										animate={{ opacity: 1, y: 0 }}
+										exit={{ opacity: 0, scale: 0.95 }}
+										className='relative grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6'
+									>
+										<button
+											type='button'
+											onClick={() => removeClient(index)}
+											className='absolute top-0 right-0 text-red-500 hover:text-red-400'
+											title='Remover cliente'
+										>
+											<Trash2 size={20} />
+										</button>
+										<InputField label='Nome' name='name' value={client.name} onChange={(e) => handleClientChange(index, 'name', e.target.value)} />
+										<div>
+											<label className='block text-sm font-medium text-gray-300 mb-2'>Tipo de Empresa</label>
+											<div className='bg-gray-800 border border-gray-700 rounded-lg px-4 py-2'>
+												<select value={client.type} onChange={(e) => handleClientChange(index, 'type', e.target.value)} className='w-full bg-transparent text-white outline-none'>
+													<option value='MEI'>MEI</option>
+													<option value='Microempresa'>Microempresa</option>
+													<option value='Pequena Empresa'>Pequena Empresa</option>
+												</select>
+											</div>
+										</div>
+										<InputField label='Nome da Empresa' name='company' value={client.company} onChange={(e) => handleClientChange(index, 'company', e.target.value)} />
+										<InputField label='Email' name='email' value={client.email} onChange={(e) => handleClientChange(index, 'email', e.target.value)} />
+										<InputField label='Leads' name='leads' value={client.leads} onChange={(e) => handleClientChange(index, 'leads', e.target.value)} />
+										<InputField label='CPA' name='cpa' value={client.cpa} onChange={(e) => handleClientChange(index, 'cpa', e.target.value)} />
+										<InputField label='ROAS' name='roas' value={client.roas} onChange={(e) => handleClientChange(index, 'roas', e.target.value)} />
+										<InputField label='Conversão' name='conversion' value={client.conversion} onChange={(e) => handleClientChange(index, 'conversion', e.target.value)} />
+										<InputField label='Valor Mensal' name='monthlyFee' value={client.monthlyFee} onChange={(e) => handleClientChange(index, 'monthlyFee', e.target.value)} />
+										<InputField label='Canal de Aquisição' name='channel' value={client.channel} onChange={(e) => handleClientChange(index, 'channel', e.target.value)} />
+										<InputField label='Descrição do Serviço' name='description' value={client.description} onChange={(e) => handleClientChange(index, 'description', e.target.value)} />
+										<InputField label='Contrato (meses)' name='duration' value={client.duration} onChange={(e) => handleClientChange(index, 'duration', e.target.value)} />
+									</motion.div>
+								))}
+							</AnimatePresence>
+						)}
+						<button type='button' onClick={addClient} className='text-sm text-indigo-400 hover:underline mt-2'>+ Adicionar Cliente</button>
 					</div>
-
-					{/* BOTÃO ENVIAR */}
 					<div className='sm:col-span-2 mt-4'>
-						<button
-							type='submit'
-							className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg'
-						>
-							📤 Enviar Dados
-						</button>
+						<button type='submit' className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg'>📤 Enviar Dados</button>
 					</div>
 				</form>
 			</main>
@@ -161,15 +164,8 @@ const InputField = ({ label, name, icon: Icon, value, onChange }) => (
 	<div>
 		<label className='block text-sm font-medium text-gray-300 mb-2'>{label}</label>
 		<div className='flex items-center bg-gray-800 border border-gray-700 rounded-lg px-4 py-2'>
-			<Icon className='text-gray-400 w-5 h-5 mr-2' />
-			<input
-				type='text'
-				name={name}
-				value={value}
-				onChange={onChange}
-				className='w-full bg-transparent text-white outline-none placeholder-gray-400'
-				placeholder={label}
-			/>
+			{Icon && <Icon className='text-gray-400 w-5 h-5 mr-2' />}
+			<input type='text' name={name} value={value} onChange={onChange} className='w-full bg-transparent text-white outline-none placeholder-gray-400' placeholder={label} />
 		</div>
 	</div>
 );
