@@ -1,4 +1,4 @@
-import { BarChart2,LibraryBig, Landmark, UserRoundPlus, KeyRound, Code,Gem,  DollarSign, Menu, Users,  } from "lucide-react";
+import { Cog,LibraryBig, Landmark, UserRoundPlus, KeyRound, Code,Gem,  DollarSign, Menu, Users,  } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -16,7 +16,7 @@ const SIDEBAR_ITEMS = [
 	{ name: "Ads", icon: KeyRound, color: "#10B981", href: "/ads" },
 	{ name: "Colaboradores", icon: Users, color: "#F59E0B", href: "/colaboradores" },
 	{ name: "Financeiro", icon: DollarSign, color: "#3B82F6", href: "/financeiro" },
-	{ name: "Configuração", icon: Code, color: "#6EE7B7", href: "/configuracao" },
+	{ name: "Configurações", icon: Cog, color: "#6EE7B7", href: "/configuracao" },
 ];
 
 const Sidebar = () => {
