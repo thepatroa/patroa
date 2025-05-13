@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { DollarSign, Users, UserCheck, UserPlus, Briefcase, FileText } from "lucide-react";
+import { DollarSign, Users, UserCheck, UserPlus, Briefcase, FileText, Trash2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const currencyFormatter = new Intl.NumberFormat("pt-BR", {
 	style: "currency",
@@ -15,9 +16,7 @@ const BusinessOverviewForm = () => {
 		lastMonthLeads: "",
 		totalEmployees: "",
 		companyType: "MEI",
-		employees: [
-			{ name: "", salary: "", role: "" },
-		],
+		employees: [{ name: "", salary: "", role: "" }],
 		servicePrice: "",
 	});
 
@@ -33,14 +32,18 @@ const BusinessOverviewForm = () => {
 
 	const handleEmployeeChange = (index, field, value) => {
 		const updated = [...form.employees];
-		updated[index][field] = field === "salary"
-			? currencyFormatter.format(Number(value.replace(/\D/g, "")) / 100)
-			: value;
+		updated[index][field] =
+			field === "salary" ? currencyFormatter.format(Number(value.replace(/\D/g, "")) / 100) : value;
 		setForm({ ...form, employees: updated });
 	};
 
 	const addEmployee = () => {
 		setForm({ ...form, employees: [...form.employees, { name: "", salary: "", role: "" }] });
+	};
+
+	const removeEmployee = (indexToRemove) => {
+		const updated = form.employees.filter((_, idx) => idx !== indexToRemove);
+		setForm({ ...form, employees: updated });
 	};
 
 	const handleSubmit = (e) => {
@@ -55,41 +58,11 @@ const BusinessOverviewForm = () => {
 				<h2 className='text-2xl font-semibold mb-6 text-gray-100'>📋 Dados do Negócio</h2>
 
 				<form onSubmit={handleSubmit} className='grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-100'>
-					<InputField
-						label='Faturamento Mês Passado'
-						name='lastMonthRevenue'
-						icon={DollarSign}
-						value={form.lastMonthRevenue}
-						onChange={handleCurrencyChange}
-					/>
-					<InputField
-						label='Total de Clientes'
-						name='totalClients'
-						icon={Users}
-						value={form.totalClients}
-						onChange={handleChange}
-					/>
-					<InputField
-						label='Clientes Ativos'
-						name='activeClients'
-						icon={UserCheck}
-						value={form.activeClients}
-						onChange={handleChange}
-					/>
-					<InputField
-						label='Leads Mês Passado'
-						name='lastMonthLeads'
-						icon={UserPlus}
-						value={form.lastMonthLeads}
-						onChange={handleChange}
-					/>
-					<InputField
-						label='Número de Funcionários'
-						name='totalEmployees'
-						icon={Briefcase}
-						value={form.totalEmployees}
-						onChange={handleChange}
-					/>
+					<InputField label='Faturamento Mês Passado' name='lastMonthRevenue' icon={DollarSign} value={form.lastMonthRevenue} onChange={handleCurrencyChange} />
+					<InputField label='Total de Clientes' name='totalClients' icon={Users} value={form.totalClients} onChange={handleChange} />
+					<InputField label='Clientes Ativos' name='activeClients' icon={UserCheck} value={form.activeClients} onChange={handleChange} />
+					<InputField label='Leads Mês Passado' name='lastMonthLeads' icon={UserPlus} value={form.lastMonthLeads} onChange={handleChange} />
+					<InputField label='Número de Funcionários' name='totalEmployees' icon={Briefcase} value={form.totalEmployees} onChange={handleChange} />
 
 					{/* SELECT TIPO DE EMPRESA */}
 					<div>
@@ -108,42 +81,58 @@ const BusinessOverviewForm = () => {
 						</div>
 					</div>
 
-					<InputField
-						label='Preço do Serviço'
-						name='servicePrice'
-						icon={DollarSign}
-						value={form.servicePrice}
-						onChange={handleCurrencyChange}
-					/>
+					<InputField label='Preço do Serviço' name='servicePrice' icon={DollarSign} value={form.servicePrice} onChange={handleCurrencyChange} />
 
 					{/* FUNCIONÁRIOS */}
 					<div className='sm:col-span-2'>
 						<label className='block text-sm font-medium text-gray-300 mb-2'>Funcionários</label>
-						{form.employees.map((emp, index) => (
-							<div key={index} className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4'>
-								<input
-									type='text'
-									placeholder='Nome'
-									className='bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
-									value={emp.name}
-									onChange={(e) => handleEmployeeChange(index, "name", e.target.value)}
-								/>
-								<input
-									type='text'
-									placeholder='Cargo'
-									className='bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
-									value={emp.role}
-									onChange={(e) => handleEmployeeChange(index, "role", e.target.value)}
-								/>
-								<input
-									type='text'
-									placeholder='Salário'
-									className='bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
-									value={emp.salary}
-									onChange={(e) => handleEmployeeChange(index, "salary", e.target.value)}
-								/>
-							</div>
-						))}
+
+						<AnimatePresence>
+							{form.employees.map((emp, index) => (
+								<motion.div
+									key={index}
+									initial={{ opacity: 0, y: -10 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+									className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 relative'
+								>
+									<input
+										type='text'
+										placeholder='Nome'
+										className='bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
+										value={emp.name}
+										onChange={(e) => handleEmployeeChange(index, "name", e.target.value)}
+									/>
+									<input
+										type='text'
+										placeholder='Cargo'
+										className='bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
+										value={emp.role}
+										onChange={(e) => handleEmployeeChange(index, "role", e.target.value)}
+									/>
+									<div className='flex gap-2'>
+										<input
+											type='text'
+											placeholder='Salário'
+											className='flex-1 bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 placeholder-gray-400'
+											value={emp.salary}
+											onChange={(e) => handleEmployeeChange(index, "salary", e.target.value)}
+										/>
+										{form.employees.length > 1 && (
+											<button
+												type='button'
+												onClick={() => removeEmployee(index)}
+												className='text-red-500 hover:text-red-400 px-2'
+												title='Remover colaborador'
+											>
+												<Trash2 size={20} />
+											</button>
+										)}
+									</div>
+								</motion.div>
+							))}
+						</AnimatePresence>
+
 						<button
 							type='button'
 							onClick={addEmployee}
