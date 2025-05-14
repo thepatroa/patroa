@@ -30,7 +30,7 @@ const AuthPage = () => {
 		setMessage("");
 
 		if (!emailIsValid) {
-			setMessage("Use um email válido.");
+			setMessage("Use um email válido como gmail, hotmail, outlook ou yahoo.");
 			setLoading(false);
 			return;
 		}
@@ -80,7 +80,7 @@ const AuthPage = () => {
 						/>
 						{email.length > 0 && !emailIsValid && (
 							<p className="text-xs text-red-500 mt-1">
-								Use um email válido.
+								Use um email válido como gmail, hotmail, outlook ou yahoo.
 							</p>
 						)}
 					</div>
