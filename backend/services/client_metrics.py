@@ -1,16 +1,32 @@
-def calcular_metricas(cliente):
-    faturamento = cliente.faturamento_mensal
-    custo = cliente.custo_operacional
-    impostos = cliente.impostos
+def calcular_metricas(data):
+    faturamento_mensal = data.faturamento_mensal
+    clientes_ativos = data.clientes_ativos
+    total_clientes = data.total_clientes
+    funcionarios = data.numero_funcionarios
+    preco_servico = data.preco_servico
+    impostos_total = sum(c.cpa for c in data.clientes)
 
-    lucro_bruto = faturamento - custo
-    lucro_liquido = lucro_bruto - impostos
-    ticket_medio = faturamento / cliente.clientes_ativos if cliente.clientes_ativos > 0 else 0
-    taxa_ativacao = cliente.clientes_ativos / cliente.clientes_totais if cliente.clientes_totais > 0 else 0
+    faturamento_anual = faturamento_mensal * 12
+    lucro_bruto = faturamento_mensal - (faturamento_mensal * 0.3)
+    lucro_liquido = lucro_bruto - impostos_total
+    lucro_anual = lucro_liquido * 12
+    custo_impostos_anual = impostos_total * 12
+
+    ltv_medio = preco_servico * 12
+    ltv_total = ltv_medio * clientes_ativos
+
+    valuation = faturamento_anual * 3  # exemplo simplificado
 
     return {
-        "lucro_bruto": lucro_bruto,
-        "lucro_liquido": lucro_liquido,
-        "ticket_medio": round(ticket_medio, 2),
-        "taxa_ativacao": round(taxa_ativacao * 100, 2)
+        "faturamento_anual": faturamento_anual,
+        "lucro_anual": lucro_anual,
+        "custo_impostos_anual": custo_impostos_anual,
+        "clientes_ativos": clientes_ativos,
+        "total_clientes": total_clientes,
+        "valuation": valuation,
+        "lucro_bruto": round(lucro_bruto, 2),
+        "lucro_liquido": round(lucro_liquido, 2),
+        "ltv_medio": ltv_medio,
+        "ltv_total": ltv_total,
+        "numero_funcionarios": funcionarios
     }
