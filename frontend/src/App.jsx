@@ -10,6 +10,7 @@ import OrdersPage from "./pages/ColaboradoresPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import SettingsPage from "./pages/SettingsPage";
 import BusinessOverviewForm from "./pages/InformationOverview";
+import AuthPage from "./pages/Autenticacao";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 			<Routes>
 				<Route path='/' element={<OverviewPage />} />
 				<Route path='/servicos' element={<ProductsPage />} />
+				<Route path='/autenticacao' element={<AuthPage />} />
 				<Route path='/informacoes' element={<BusinessOverviewForm />} />
 				<Route path='/clientes' element={<UsersPage />} />
 				<Route path='/ads' element={<SalesPage />} />

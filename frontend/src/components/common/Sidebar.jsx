@@ -11,6 +11,7 @@ const SIDEBAR_ITEMS = [
 		href: "/",
 	},
 	{ name: "Serviços", icon: ScrollText, color: "#8B5CF6", href: "/servicos" },
+	{ name: "Autenticação", icon: ScrollText, color: "#8B5CF6", href: "/autenticacao" },
 	{ name: "Adicionar Informações", icon: CirclePlus, color: "#F34", href: "/informacoes" },
 	{ name: "Clientes", icon: UserRoundPlus, color: "#EC4899", href: "/clientes" },
 	{ name: "Ads", icon: KeyRound, color: "#10B981", href: "/ads" },
