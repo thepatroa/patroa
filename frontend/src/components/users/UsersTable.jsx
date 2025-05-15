@@ -31,8 +31,8 @@ const UsersTable = ({ campanhas }) => {
               className="min-w-[50%] px-2"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              whileHover={{ scale: 1.03, zIndex: 10, transition: { duration: 0.3 } }}
             >
+
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl shadow-2xl p-8 text-white border-2 border-indigo-600 h-full">
                 <div className="mb-4">
                   <h3
