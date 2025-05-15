@@ -2,6 +2,7 @@ import os
 import hmac
 import hashlib
 import requests
+from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,6 +11,9 @@ SEGREDO_DO_APP = os.getenv("META_APP_SECRET")
 TOKEN_DE_ACESSO = os.getenv("META_ACCESS_TOKEN")
 ID_CONTA_ANUNCIOS = os.getenv("META_AD_ACCOUNT_ID")
 VERSAO_GRAPH = "v18.0"
+
+# Cotação fixa para BRL (R$) — ajuste conforme necessidade
+COTACAO_DOLAR_PARA_REAL = 5.00
 
 def gerar_appsecret_proof(token, segredo):
     return hmac.new(
@@ -41,6 +45,35 @@ def obter_tipo_criativo(id_criativo, proof):
     except:
         return "desconhecido"
     return "desconhecido"
+
+def obter_gasto_mensal():
+    hoje = datetime.today()
+    inicio_mes = hoje.replace(day=1).strftime("%Y-%m-%d")
+    hoje_formatado = hoje.strftime("%Y-%m-%d")
+
+    proof = gerar_appsecret_proof(TOKEN_DE_ACESSO, SEGREDO_DO_APP)
+    url = f"https://graph.facebook.com/{VERSAO_GRAPH}/{ID_CONTA_ANUNCIOS}/insights"
+
+    params = {
+        "fields": "spend",
+        "access_token": TOKEN_DE_ACESSO,
+        "appsecret_proof": proof,
+        "level": "account",
+        "time_range": f"{{\"since\":\"{inicio_mes}\",\"until\":\"{hoje_formatado}\"}}"
+    }
+
+    response = requests.get(url, params=params)
+    dados = response.json()
+
+    if "error" in dados:
+        raise Exception(dados["error"]["message"])
+
+    gasto_total = 0.0
+    for linha in dados.get("data", []):
+        gasto = float(linha.get("spend", 0.0))
+        gasto_total += gasto
+
+    return round(gasto_total * COTACAO_DOLAR_PARA_REAL, 2)
 
 def obter_visao_geral_campanhas():
     proof = gerar_appsecret_proof(TOKEN_DE_ACESSO, SEGREDO_DO_APP)
@@ -122,5 +155,6 @@ def obter_visao_geral_campanhas():
     return {
         "campanhas_ativas": quantidade_ativas,
         "total_de_campanhas": len(campanhas),
+        "gasto_mensal_reais": obter_gasto_mensal(),
         "campanhas": campanhas
     }
