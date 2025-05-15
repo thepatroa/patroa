@@ -1,5 +1,6 @@
 import { UserCheck, UserPlus, UsersIcon, UserX } from "lucide-react";
 import { motion } from "framer-motion";
+import LoadingBar from "../components/ui/LoadingBar";
 
 import Header from "../components/common/Header";
 import StatCard from "../components/common/StatCard";
@@ -48,7 +49,7 @@ const UsersPage = () => {
         </motion.div>
 
         {carregando ? (
-          <p className="text-white">Carregando campanhas...</p>
+          <LoadingBar/>
         ) : erro ? (
           <p className="text-red-500">Erro ao carregar campanhas: {erro}</p>
         ) : (
