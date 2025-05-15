@@ -105,17 +105,24 @@ const formatarData = (dataISO) => {
 };
 
 const getStatusColor = (status) => {
-  switch (status?.toUpperCase()) {
+  const normalized = status?.toUpperCase();
+
+  switch (normalized) {
     case "ATIVO":
-      return "text-green-400";
+    case "ATIVA":
+      return "text-green-500";
+    case "PAUSADO":
     case "PAUSADA":
       return "text-yellow-400";
+    case "REMOVIDO":
     case "REMOVIDA":
+    case "DESATIVADO":
     case "DESATIVADA":
       return "text-red-500";
     default:
       return "text-gray-400";
   }
 };
+
 
 export default UsersTable;
