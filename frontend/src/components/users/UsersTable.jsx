@@ -1,153 +1,74 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const initialData = {
-  Active: [
-    {
-      id: 1,
-      nome: "John Doe",
-      email: "john@example.com",
-      profissao: "Engenheiro",
-      ads: "R$ 1.500",
-      cpa: "R$ 50",
-      leads: 30,
-      conversao: "12%",
-      roas: "3.2x",
-      canalPrincipal: "Meta Ads",
-      tipoOferta: "Serviço de consultoria",
-      tempoConversao: "5 dias"
-    },
-    {
-      id: 2,
-      nome: "Jane Smith",
-      email: "jane@example.com",
-      profissao: "Contador",
-      ads: "R$ 1.400",
-      cpa: "R$ 46.67",
-      leads: 28,
-      conversao: "10%",
-      roas: "2.7x",
-      canalPrincipal: "Google Ads",
-      tipoOferta: "Serviço contábil mensal",
-      tempoConversao: "7 dias"
-    },
-    {
-      id: 3,
-      nome: "Bob Johnson",
-      email: "bob@example.com",
-      profissao: "Programador",
-      ads: "R$ 2.500",
-      cpa: "R$ 62.5",
-      leads: 40,
-      conversao: "8%",
-      roas: "2.1x",
-      canalPrincipal: "Meta Ads",
-      tipoOferta: "Infoproduto gravado",
-      tempoConversao: "3 dias"
-    },
-    {
-      id: 4,
-      nome: "Alice Green",
-      email: "alice@example.com",
-      profissao: "Designer",
-      ads: "R$ 1.800",
-      cpa: "R$ 60",
-      leads: 30,
-      conversao: "11%",
-      roas: "2.9x",
-      canalPrincipal: "Instagram",
-      tipoOferta: "Consultoria criativa",
-      tempoConversao: "4 dias"
-    },
-    {
-      id: 5,
-      nome: "Lucas Silva",
-      email: "lucas@example.com",
-      profissao: "Médico",
-      ads: "R$ 2.000",
-      cpa: "R$ 66.67",
-      leads: 30,
-      conversao: "10%",
-      roas: "2.5x",
-      canalPrincipal: "Google Ads",
-      tipoOferta: "Consulta online",
-      tempoConversao: "2 dias"
-    },
-    {
-      id: 6,
-      nome: "Maria Oliveira",
-      email: "maria@example.com",
-      profissao: "Nutricionista",
-      ads: "R$ 1.200",
-      cpa: "R$ 40",
-      leads: 30,
-      conversao: "12%",
-      roas: "3.0x",
-      canalPrincipal: "Instagram",
-      tipoOferta: "Mentoria alimentar",
-      tempoConversao: "6 dias"
-    }
-  ]
-};
-
-const UsersTable = () => {
+const UsersTable = ({ campanhas }) => {
   const [startIndex, setStartIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const clients = initialData.Active;
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || campanhas.length <= 3) return;
     const interval = setInterval(() => {
-      setStartIndex((prev) =>
-        prev + 1 > clients.length - 3 ? 0 : prev + 1
-      );
+      setStartIndex((prev) => (prev + 1 > campanhas.length - 3 ? 0 : prev + 1));
     }, 3000);
     return () => clearInterval(interval);
-  }, [clients.length, isPaused]);
+  }, [campanhas.length, isPaused]);
 
   return (
     <div className="p-8 overflow-hidden">
-      <h2 className="text-xl text-white font-semibold mb-4">Clientes</h2>
+      <h2 className="text-xl text-white font-semibold mb-4">Campanhas</h2>
 
       <div className="relative w-full overflow-hidden">
         <motion.div
           className="flex gap-6"
-          animate={{ x: `-${startIndex * (100 / 3)}%` }}
+          animate={{ x: `-${startIndex * (100 / 2)}%` }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          style={{ width: `${(clients.length / 3) * 100}%` }}
+          style={{ width: `${(campanhas.length / 2) * 100}%` }}
         >
-          {clients.map((user, index) => (
+          {campanhas.map((campanha, index) => (
             <motion.div
-              key={user.id + index}
-              className="min-w-[33.3333%] max-w-[33.3333%] px-2"
+              key={campanha.id + index}
+              className="min-w-[50%] px-2"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              whileHover={{
-                scale: 1.05,
-                zIndex: 10,
-                transition: { duration: 0.3 }
-              }}
+              whileHover={{ scale: 1.05, zIndex: 10, transition: { duration: 0.3 } }}
             >
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-lg p-6 text-white border border-gray-700 h-full flex flex-col justify-between">
-                {/* Cabeçalho */}
                 <div className="mb-4">
-                  <h2 className="text-2xl font-bold text-white">{user.nome}</h2>
-                  <p className="text-sm text-gray-400">{user.profissao}</p>
-                  <p className="text-xs text-blue-300 mt-1">{user.email}</p>
+                  <h3
+                    className="text-lg font-bold mb-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
+                    title={campanha.nome}
+                  >
+                    {campanha.nome}
+                  </h3>
+                  <p className="text-sm text-gray-400">Objetivo: {campanha.objetivo}</p>
+                  <p className="text-xs text-blue-300 mt-1">Status: {campanha.status}</p>
                 </div>
 
                 <hr className="border-gray-700 my-3" />
 
-                {/* Indicadores */}
                 <div className="grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
-                  <DataRow label="Leads" value={user.leads} />
-                  <DataRow label="CPA" value={user.cpa} color="text-green-400" />
-                  <DataRow label="ROAS" value={user.roas} color="text-pink-400" />
-                  <DataRow label="Conversão" value={user.conversao} color="text-purple-400" />
-                  <DataRow label="Investimento" value={user.ads} color="text-blue-400" />
-                  <DataRow label="Canal" value={user.canalPrincipal} />
-                  <DataRow label="Oferta" value={user.tipoOferta} />
-                  <DataRow label="Tempo p/ Converter" value={user.tempoConversao} />
+                  <DataRow label="Início" value={formatarData(campanha.inicio)} />
+                  <DataRow label="Fim" value={formatarData(campanha.fim)} />
+                  <DataRow label="Orçamento" value={`R$ ${campanha.orcamento_diario}`} />
+                  <DataRow label="Tipo" value={campanha.tipo_de_orcamento} />
+                  <DataRow label="Anúncios Ativos" value={campanha.quantidade_de_anuncios_ativos} />
+                  <DataRow label="Criada em" value={formatarData(campanha.criada_em)} />
+                  <DataRow label="Atualizada em" value={formatarData(campanha.atualizada_em)} />
+                  <DataRow label="Status Configurado" value={campanha.status_configurado} />
+                  <DataRow label="Orçamento Total" value={campanha.orcamento_total ? `R$ ${campanha.orcamento_total}` : "-"} />
+
+                  {campanha.anuncios?.length > 0 && (
+                    <div className="col-span-2">
+                      <span className="text-xs text-gray-400 uppercase tracking-wider">Anúncios</span>
+                      <ul className="text-sm mt-1 list-disc list-inside text-white space-y-1">
+                        {campanha.anuncios.map((anuncio) => (
+                          <li key={anuncio.id}>
+                            {anuncio.nome} - {anuncio.status} ({anuncio.tipo})
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -158,11 +79,20 @@ const UsersTable = () => {
   );
 };
 
-const DataRow = ({ label, value, color }) => (
+const DataRow = ({ label, value }) => (
   <div className="flex flex-col">
     <span className="text-xs text-gray-400 uppercase tracking-wider">{label}</span>
-    <span className={`text-sm font-semibold ${color || "text-white"}`}>{value}</span>
+    <span className="text-sm font-semibold text-white">{value}</span>
   </div>
 );
+
+const formatarData = (dataISO) => {
+  if (!dataISO) return "-";
+  return new Date(dataISO).toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+};
 
 export default UsersTable;
