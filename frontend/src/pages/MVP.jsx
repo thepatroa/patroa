@@ -27,6 +27,12 @@ const checklistItens = [
   }
 ];
 
+const getMascoteImage = (score) => {
+  if (score === 5) return "https://cdn-icons-png.flaticon.com/512/616/616408.png"; // Mestre feliz
+  if (score >= 3) return "https://cdn-icons-png.flaticon.com/512/616/616438.png"; // Intermediário
+  return "https://cdn-icons-png.flaticon.com/512/616/616408.png"; // Iniciante
+};
+
 const getLevel = (score) => {
   if (score === 5) return { nivel: "Mestre da Retenção", estrelas: 5, cor: "#10B981", mensagem: "Parabéns! Sua gestão é incrível! Seus clientes devem te amar 💚" };
   if (score >= 3) return { nivel: "Intermediário", estrelas: 3, cor: "#F59E0B", mensagem: "Você está no caminho! Mas tem ajustes importantes a fazer." };
@@ -47,7 +53,7 @@ const ChecklistRetencao = () => {
     if (novasRespostas.length === checklistItens.length) {
       setTimeout(() => setMostrarResultado(true), 300);
     } else {
-      setEtapa(etapa + 1);
+      setEtapa(prev => prev + 1);
     }
   };
 
@@ -55,12 +61,13 @@ const ChecklistRetencao = () => {
     setRespostas([]);
     setMostrarResultado(false);
     setEtapa(0);
-    setIniciado(false);
+    // setIniciado(false); // REMOVIDO para manter o checklist aberto após reiniciar
   };
 
   const score = respostas.filter(r => r === true).length;
   const total = checklistItens.length;
   const { nivel, estrelas, cor, mensagem } = getLevel(score);
+  const mascoteURL = getMascoteImage(score);
 
   return (
     <div className='flex-1 overflow-auto relative z-10 bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen text-white'>
@@ -132,11 +139,12 @@ const ChecklistRetencao = () => {
               exit={{ opacity: 0 }}
             >
               <motion.div
-                className='bg-gray-900 border border-gray-700 p-6 rounded-xl shadow-2xl text-white w-[90%] max-w-xl'
+                className='bg-gray-900 border border-gray-700 p-6 rounded-xl shadow-2xl text-white w-[90%] max-w-xl flex flex-col items-center'
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.8 }}
               >
+                <img src={mascoteURL} alt='Mascote' className='w-24 h-24 mb-4' />
                 <h3 className='text-2xl font-bold mb-2'>Resultado Final 🎉</h3>
                 <p className='text-lg mb-4' style={{ color: cor }}>{mensagem}</p>
                 <p className='text-sm text-gray-400 mb-4'>Você acertou {score} de {total} itens do checklist.</p>
