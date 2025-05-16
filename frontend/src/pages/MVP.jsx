@@ -40,6 +40,7 @@ const getLevel = (score) => {
 };
 
 const ChecklistRetencao = () => {
+  const [xp, setXp] = useState(0);
   const [respostas, setRespostas] = useState([]);
   const [mostrarResultado, setMostrarResultado] = useState(false);
   const [iniciado, setIniciado] = useState(false);
@@ -48,17 +49,22 @@ const ChecklistRetencao = () => {
 
   const handleResposta = (resposta) => {
     somResposta.play();
+    if (resposta) setXp((prev) => prev + 20);
+  
     const novasRespostas = [...respostas, resposta];
     setRespostas(novasRespostas);
+  
     if (novasRespostas.length === checklistItens.length) {
       setTimeout(() => setMostrarResultado(true), 300);
     } else {
-      setEtapa(prev => prev + 1);
+      setEtapa((prev) => prev + 1);
     }
   };
+  
 
   const reiniciarChecklist = () => {
     setRespostas([]);
+    setXp(0);
     setMostrarResultado(false);
     setEtapa(0);
     // setIniciado(false); // REMOVIDO para manter o checklist aberto após reiniciar
@@ -145,6 +151,7 @@ const ChecklistRetencao = () => {
                 exit={{ scale: 0.8 }}
               >
                 <img src={mascoteURL} alt='Mascote' className='w-24 h-24 mb-4' />
+                <p className='text-sm text-indigo-300 mb-2'>XP acumulado: {xp} ⚡</p>
                 <h3 className='text-2xl font-bold mb-2'>Resultado Final 🎉</h3>
                 <p className='text-lg mb-4' style={{ color: cor }}>{mensagem}</p>
                 <p className='text-sm text-gray-400 mb-4'>Você acertou {score} de {total} itens do checklist.</p>
