@@ -24,7 +24,8 @@ function App() {
 
 			<Sidebar />
 			<Routes>
-				<Route path='/' element={<OverviewPage />} />		
+				<Route path='/' element={<OverviewPage />} />
+				<Route path='/mvp' element={<ChecklistRetencao />} />
 				<Route path='/servicos' element={<ProductsPage />} />
 				<Route path='/autenticacao' element={<AuthPage />} />
 				<Route path='/informacoes' element={<BusinessOverviewForm />} />
