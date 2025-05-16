@@ -11,6 +11,7 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import SettingsPage from "./pages/SettingsPage";
 import BusinessOverviewForm from "./pages/InformationOverview";
 import AuthPage from "./pages/Autenticacao";
+import ChecklistRetencao from "./pages/MVP";
 
 function App() {
 	return (
@@ -23,7 +24,7 @@ function App() {
 
 			<Sidebar />
 			<Routes>
-				<Route path='/' element={<OverviewPage />} />
+				<Route path='/' element={<OverviewPage />} />		
 				<Route path='/servicos' element={<ProductsPage />} />
 				<Route path='/autenticacao' element={<AuthPage />} />
 				<Route path='/informacoes' element={<BusinessOverviewForm />} />
