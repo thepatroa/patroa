@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "../components/common/Header";
 import StatCard from "../components/common/StatCard";
@@ -38,8 +38,10 @@ const ChecklistRetencao = () => {
   const [mostrarResultado, setMostrarResultado] = useState(false);
   const [iniciado, setIniciado] = useState(false);
   const [etapa, setEtapa] = useState(0);
+  const somResposta = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-game-ball-tap-2073.mp3");
 
   const handleResposta = (resposta) => {
+    somResposta.play();
     const novasRespostas = [...respostas, resposta];
     setRespostas(novasRespostas);
     if (novasRespostas.length === checklistItens.length) {
@@ -92,6 +94,15 @@ const ChecklistRetencao = () => {
                 animate={{ scale: 1 }}
                 exit={{ scale: 0.8 }}
               >
+                <div className='mb-4'>
+                  <div className='text-sm text-gray-400 mb-2'>Pergunta {etapa + 1} de {total}</div>
+                  <div className='w-full h-2 bg-gray-700 rounded-full overflow-hidden'>
+                    <div
+                      className='h-full bg-indigo-500 transition-all duration-300'
+                      style={{ width: `${((etapa + 1) / total) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
                 <h3 className='text-xl font-bold mb-4'>{checklistItens[etapa].pergunta}</h3>
                 <div className='flex justify-center gap-6'>
                   <button
