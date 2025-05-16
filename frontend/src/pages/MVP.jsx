@@ -40,6 +40,7 @@ const getLevel = (score) => {
 };
 
 const ChecklistRetencao = () => {
+  const [mascoteMensagem, setMascoteMensagem] = useState(null);
   const [xp, setXp] = useState(0);
   const [respostas, setRespostas] = useState([]);
   const [mostrarResultado, setMostrarResultado] = useState(false);
@@ -49,25 +50,27 @@ const ChecklistRetencao = () => {
 
   const handleResposta = (resposta) => {
     somResposta.play();
-    if (resposta) setXp((prev) => prev + 20);
-  
     const novasRespostas = [...respostas, resposta];
     setRespostas(novasRespostas);
-  
+
+    const dica = !resposta ? checklistItens[etapa].dica : null;
+    setMascoteMensagem(dica);
+
+    if (resposta) setXp((prev) => prev + 20);
+
     if (novasRespostas.length === checklistItens.length) {
       setTimeout(() => setMostrarResultado(true), 300);
     } else {
       setEtapa((prev) => prev + 1);
     }
-  };
-  
+};
 
   const reiniciarChecklist = () => {
     setRespostas([]);
+    setMascoteMensagem(null);
     setXp(0);
     setMostrarResultado(false);
     setEtapa(0);
-    // setIniciado(false); // REMOVIDO para manter o checklist aberto após reiniciar
   };
 
   const score = respostas.filter(r => r === true).length;
@@ -116,7 +119,10 @@ const ChecklistRetencao = () => {
                     ></div>
                   </div>
                 </div>
-                <h3 className='text-xl font-bold mb-4'>{checklistItens[etapa].pergunta}</h3>
+                <h3 className='text-xl font-bold mb-2'>{checklistItens[etapa].pergunta}</h3>
+                {mascoteMensagem && (
+                  <p className='text-sm text-yellow-300 mb-4 italic'>💡 {mascoteMensagem}</p>
+                )}
                 <div className='flex justify-center gap-6'>
                   <button
                     onClick={() => handleResposta(true)}
