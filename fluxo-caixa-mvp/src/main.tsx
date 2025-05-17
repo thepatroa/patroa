@@ -1,10 +1,10 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import FluxoCaixaMVP from './App.tsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import FluxoCaixaMVP from "./App";
+import "./index.css"; // <- ESSE AQUI É ESSENCIAL
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
     <FluxoCaixaMVP />
-  </StrictMode>,
-)
+  </React.StrictMode>
+);

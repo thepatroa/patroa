@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar } from "lucide-react";
+import { Calendar, Plus, DollarSign, ArrowDown } from "lucide-react";
 import confetti from "canvas-confetti";
 
 const FluxoCaixaMVP = () => {
@@ -19,6 +19,7 @@ const FluxoCaixaMVP = () => {
 
   const handleRegistro = () => {
     if (!entrada && !saida) return;
+
     const valor = entrada ? parseFloat(entrada) : -parseFloat(saida);
     const tipo = entrada ? "Entrada" : "Saída";
 
@@ -40,7 +41,7 @@ const FluxoCaixaMVP = () => {
 
   const fecharCaixa = () => {
     if (registros.length === 0) return;
-    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
     setDias([...dias, { data: hoje, lucro: total }]);
     setRegistros([]);
     setMensagem("✅ Dia fechado com sucesso!");
@@ -48,40 +49,46 @@ const FluxoCaixaMVP = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-md bg-gray-800 p-6 rounded-2xl shadow-2xl border border-gray-700 space-y-6">
-        <h1 className="text-3xl font-extrabold text-center bg-gradient-to-r from-indigo-400 to-purple-600 bg-clip-text text-transparent">
-          📅 Caixa do Dia
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white px-4 py-10">
+      <div className="w-full max-w-lg bg-gray-800 rounded-2xl p-8 shadow-2xl border border-gray-700 space-y-8">
+        <h1 className="text-4xl font-extrabold text-center bg-gradient-to-r from-green-400 via-indigo-400 to-purple-600 bg-clip-text text-transparent">
+          Fluxo de Caixa
         </h1>
 
+        {/* Formulário */}
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-indigo-300">Registrar Movimento</h2>
-          <input
-            type="number"
-            placeholder="Receita (R$)"
-            className="w-full p-2 rounded bg-gray-700 placeholder-gray-400 text-white"
-            value={entrada}
-            onChange={(e) => setEntrada(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Despesa (R$)"
-            className="w-full p-2 rounded bg-gray-700 placeholder-gray-400 text-white"
-            value={saida}
-            onChange={(e) => setSaida(e.target.value)}
-          />
+          <h2 className="text-lg font-semibold text-indigo-300">Novo Registro</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <input
+              type="number"
+              placeholder="Entrada (R$)"
+              className="p-2 rounded bg-gray-700 text-green-300 placeholder-green-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+              value={entrada}
+              onChange={(e) => setEntrada(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Saída (R$)"
+              className="p-2 rounded bg-gray-700 text-red-300 placeholder-red-300 focus:outline-none focus:ring-2 focus:ring-red-500"
+              value={saida}
+              onChange={(e) => setSaida(e.target.value)}
+            />
+          </div>
           <button
             onClick={handleRegistro}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 transition duration-300 text-white p-2 rounded font-semibold"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 transition duration-300 text-white p-3 rounded-xl font-bold flex items-center justify-center gap-2"
           >
-            Registrar Movimento
+            <Plus size={18} /> Adicionar Movimento
           </button>
-          {mensagem && <p className="text-sm text-green-300 text-center italic">{mensagem}</p>}
+          {mensagem && <p className="text-sm text-center text-green-300 italic">{mensagem}</p>}
         </div>
 
-        <div className="border-t border-gray-700 pt-4 space-y-4">
-          <h2 className="text-lg font-semibold text-indigo-300">Resumo de Hoje ({hoje})</h2>
-          <ul className="space-y-1 max-h-40 overflow-y-auto pr-2">
+        {/* Resumo do dia */}
+        <div className="space-y-4 border-t border-gray-700 pt-6">
+          <h2 className="text-lg font-semibold text-indigo-300">
+            Resumo de Hoje ({hoje})
+          </h2>
+          <ul className="space-y-2 max-h-40 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
             {registros.map((reg) => (
               <li key={reg.id} className="flex justify-between text-sm border-b border-gray-700 pb-1">
                 <span>{reg.tipo}</span>
@@ -91,7 +98,7 @@ const FluxoCaixaMVP = () => {
               </li>
             ))}
           </ul>
-          <div className="text-right font-bold">
+          <div className="text-right font-bold text-lg">
             Total:{" "}
             <span className={total >= 0 ? "text-green-400" : "text-red-400"}>
               {total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
@@ -99,18 +106,19 @@ const FluxoCaixaMVP = () => {
           </div>
           <button
             onClick={fecharCaixa}
-            className="w-full bg-green-600 hover:bg-green-700 transition duration-300 text-white p-2 rounded font-semibold"
+            className="w-full bg-green-600 hover:bg-green-700 transition duration-300 text-white p-3 rounded-xl font-bold flex items-center justify-center gap-2"
           >
-            Fechar Dia
+            <DollarSign size={18} /> Fechar Dia
           </button>
         </div>
 
+        {/* Histórico */}
         {dias.length > 0 && (
-          <div className="pt-4 border-t border-gray-700">
-            <h2 className="text-lg font-semibold mb-2 flex items-center gap-2 text-indigo-300">
-              <Calendar className="w-5 h-5" /> Histórico de Lucros
+          <div className="space-y-4 border-t border-gray-700 pt-6">
+            <h2 className="text-lg font-semibold text-indigo-300 flex items-center gap-2">
+              <Calendar size={18} /> Histórico de Lucros
             </h2>
-            <ul className="space-y-1 max-h-40 overflow-y-auto pr-2">
+            <ul className="space-y-1 max-h-40 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
               {dias.map((dia, idx) => (
                 <li key={idx} className="flex justify-between text-sm border-b border-gray-700 pb-1">
                   <span>{dia.data}</span>
