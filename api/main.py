@@ -1,27 +1,32 @@
 import os
+from dotenv import load_dotenv 
+
+load_dotenv() 
+
 import pandas as pd
 import google.generativeai as genai
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-# === Configurar chave da API do Gemini ===
-genai.configure(api_key="AIzaSyD6aOsxl__esiDPnyJVHoOb0w7q8m0MM4E")
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise RuntimeError("A variável de ambiente GEMINI_API_KEY não está definida.")
+
+genai.configure(api_key=api_key)
 model = genai.GenerativeModel("models/gemini-1.5-flash")
 
-# === Inicializar FastAPI ===
+
 app = FastAPI()
 
-# === Configurar CORS ===
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # ou ["*"] para permitir tudo (não recomendado em produção)
+    allow_origins=["http://localhost:5173"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# === Função para ler CSV ===
 def ler_csv(upload_file: UploadFile) -> pd.DataFrame:
     try:
         df = pd.read_csv(upload_file.file)
@@ -29,7 +34,6 @@ def ler_csv(upload_file: UploadFile) -> pd.DataFrame:
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Erro ao ler CSV: {str(e)}")
 
-# === Função para categorizar os gastos com Gemini ===
 def categorizar_gastos(df: pd.DataFrame) -> str:
     texto_gastos = df.to_string(index=False)
 
@@ -48,7 +52,6 @@ Dados:
     response = model.generate_content(prompt)
     return response.text
 
-# === Rota principal ===
 @app.post("/categorizar/")
 async def upload_csv(file: UploadFile = File(...)):
     if not file.filename.endswith(".csv"):
