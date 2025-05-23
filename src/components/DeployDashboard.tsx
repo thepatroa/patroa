@@ -1,4 +1,3 @@
-import React from "react";
 import type { DeployDashboardProps } from "./DeployDashboardType.type";
 import { Container } from "./DeployDashboard.style";
 
