@@ -3,8 +3,18 @@ from models import StartupMetrics
 from typing import List
 import json
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Startup ERP API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 DATA_FILE = "data.json"
 
