@@ -47,7 +47,7 @@ interface Metrics {
   active_client_growth: number;
 }
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const [data, setData] = useState<Metrics | null>(null);
 
   useEffect(() => {
@@ -58,51 +58,60 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  if (!data) return <p>Loading...</p>;
+  if (!data)
+    return (
+      <p style={{ color: "var(--text-secondary)", textAlign: "center" }}>
+        Loading data...
+      </p>
+    );
 
   return (
     <div className="dashboard-container">
-      <h1>Dashboard</h1>
-
+      <h1>Patroa</h1>
       <div className="charts-row">
         <div className="chart-container">
-          <h2>Gross vs Net Revenue</h2>
+          <h2>Revenue</h2>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart
               data={[
-                { name: "Gross Revenue", value: data.gross_revenue },
-                { name: "Net Revenue", value: data.net_revenue },
+                { name: "Gross", value: data.gross_revenue },
+                { name: "Net", value: data.net_revenue },
               ]}
             >
-              <Line type="monotone" dataKey="value" stroke="#8884d8" />
-              <CartesianGrid stroke="#ccc" />
-              <XAxis dataKey="name" />
-              <YAxis />
+              <Line
+                type="monotone"
+                dataKey="value"
+                stroke="var(--ocean-blue)"
+                strokeWidth={3}
+              />
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" stroke="#666" />
+              <YAxis stroke="#666" />
               <Tooltip />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
         <div className="chart-container">
-          <h2>Gross vs Net Profit</h2>
+          <h2>Profit</h2>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart
               data={[
-                { name: "Gross Profit", value: data.gross_profit },
-                { name: "Net Profit", value: data.net_profit },
+                { name: "Gross", value: data.gross_profit },
+                { name: "Net", value: data.net_profit },
               ]}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
+              <XAxis dataKey="name" stroke="#666" />
+              <YAxis stroke="#666" />
               <Tooltip />
-              <Bar dataKey="value" fill="#82ca9d" />
+              <Bar dataKey="value" fill="var(--ocean-blue-light)" />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         <div className="chart-container">
-          <h2>Retention vs Churn Rates</h2>
+          <h2>Retention</h2>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie
@@ -114,15 +123,32 @@ const Dashboard = () => {
                 outerRadius={60}
                 label
               >
-                {[
-                  { name: "Retention", color: "#00C49F" },
-                  { name: "Churn", color: "#FF8042" },
-                ].map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
+                <Cell fill="var(--ocean-blue)" />
+                <Cell fill="#d0021b" />
               </Pie>
               <Tooltip />
             </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Novo Gráfico para o CAC */}
+        <div className="chart-container">
+          <h2>CAC</h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart
+              data={[
+                {
+                  name: "CAC",
+                  value: data.customer_acquisition_cost,
+                },
+              ]}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" stroke="#666" />
+              <YAxis stroke="#666" />
+              <Tooltip />
+              <Bar dataKey="value" fill="var(--ocean-blue)" />
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
